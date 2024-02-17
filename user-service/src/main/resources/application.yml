@@ -1,0 +1,28 @@
+server:
+  port: 8081
+spring:
+  cloud:
+    nacos:
+      server-addr: 192.168.130.1:8848
+      username: nacos
+      password: nacos
+
+    inetutils:
+      ignored-interfaces: 'VMware Virtual Ethernet Adapter for VMnet1,VMware Virtual Ethernet Adapter for VMnet8'
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/user
+    username: root
+    password: SXY-E.YT
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  application:
+    name: userservice
+
+mybatis-plus:
+  type-aliases-package: cn.itcast.user.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+logging:
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS
