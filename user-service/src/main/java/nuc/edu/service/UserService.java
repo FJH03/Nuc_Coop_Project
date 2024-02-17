@@ -1,4 +1,4 @@
-package nuc.edu.Service;
+package nuc.edu.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import nuc.edu.pojo.User;

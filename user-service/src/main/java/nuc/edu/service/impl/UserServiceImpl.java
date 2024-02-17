@@ -1,10 +1,10 @@
-package nuc.edu.Service.impl;
+package nuc.edu.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import nuc.edu.mapper.UserMapper;
-import nuc.edu.Service.UserService;
+import nuc.edu.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import nuc.edu.utils.ValidateCodeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
