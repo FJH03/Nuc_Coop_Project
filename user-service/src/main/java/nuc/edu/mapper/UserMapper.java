@@ -1,8 +1,8 @@
-package Mapper;
+package nuc.edu.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
-import pojo.User;
+import nuc.edu.pojo.User;
 
 /**
  * @Created with Intellij IDEA Ultimate 2022.02.03 正式旗舰版
@@ -13,5 +13,4 @@ import pojo.User;
  * @Description:添加自定义描述
  */
 @Mapper
-public interface UserMapper extends BaseMapper<User> {
-}
+public interface UserMapper extends BaseMapper<User> {}

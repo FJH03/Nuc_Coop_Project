@@ -1,7 +1,9 @@
-package Service;
+package nuc.edu.Service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import pojo.User;
+import nuc.edu.pojo.User;
+
+import java.util.Map;
 
 /**
  * @Created with Intellij IDEA Ultimate 2022.02.03 正式旗舰版
@@ -11,4 +13,8 @@ import pojo.User;
  * @Time: 11:18
  * @Description:添加自定义描述
  */
-public interface UserService extends IService<User> {}
+public interface UserService extends IService<User> {
+    User login(Map map);
+
+    boolean sendMsg(User user);
+}
