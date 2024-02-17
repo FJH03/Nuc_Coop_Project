@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #f7f7f7;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-form {
+            margin-top: 30px;
+        }
+
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .login-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .login-form button:hover {
+            background-color: #45a049;
+        }
+
+        .login-type {
+            margin-bottom: 20px;
+        }
+
+        .login-type button {
+            width: 50%;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+<div class="login-container">
+    <div class="login-form">
+        <h2>请选择登录方式</h2>
+
+        <div class="login-type" v-if="!isPhoneLogin">
+            <button @click="switchToPhoneLogin">手机号/验证码登录</button>
+        </div>
+
+        <div class="login-type" v-else>
+            <button @click="switchToUsernameLogin">用户名/密码登录</button>
+        </div>
+
+        <div v-if="!isPhoneLogin">
+            <label>用户名:</label>
+            <input type="text" v-model="username" placeholder="请输入用户名">
+
+            <label>密码:</label>
+            <input type="password" v-model="password" placeholder="请输入密码">
+
+            <button @click="loginWithUsernameAndPassword">登录</button>
+        </div>
+
+        <div v-else>
+            <label>手机号:</label>
+            <input type="text" v-model="phone" placeholder="请输入手机号">
+
+            <label>验证码:</label>
+            <input type="text" v-model="verificationCode" placeholder="请输入验证码">
+
+            <button @click="sendVerificationCode">获取验证码</button>
+
+            <button @click="loginWithPhoneAndVerificationCode">登录</button>
+        </div>
+    </div>
+</div>
+
+<script src="../js/vue.js"></script>
+<script src="../js/axios.min.js"></script>
+<script>
+    var app = new Vue({
+        el: '.login-container',
+        data: {
+            isPhoneLogin: false,
+            username: '',
+            password: '',
+            phone: '',
+            verificationCode: ''
+        },
+        methods: {
+            switchToPhoneLogin: function() {
+                this.isPhoneLogin = true;
+            },
+
+            switchToUsernameLogin: function() {
+                this.isPhoneLogin = false;
+            },
+
+            sendVerificationCode: function() {
+                // 在这里添加发送验证码的逻辑
+                axios.post('localhost:8081/user/sendMsg', {
+                    phone: this.phone
+                }).then(resp => {
+                    if (resp.data.success) {
+                        alert('验证码已发送到您的手机：' + this.phone);
+                    } else {
+                        alert('发送失败！');
+                    }
+                })
+
+            },
+
+            loginWithUsernameAndPassword: function() {
+                // 在这里添加登录逻辑
+
+
+            },
+
+            loginWithPhoneAndVerificationCode: function() {
+// 在这里添加使用手机号和验证码登录的逻辑
+                axios.post('localhost:8081/user/login', {
+                    phone: this.phone,
+                    verificationCode: this.verificationCode
+                }).then(resp => {
+                    if (resp.data.success) {
+                        alert('使用手机号和验证码登录：' + this.phone + '，验证码：' + this.verificationCode);
+                    } else {
+                        alert('登陆失败:' + resp.data.message);
+                    }
+                })
+
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

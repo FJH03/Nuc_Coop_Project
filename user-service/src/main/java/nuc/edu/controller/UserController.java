@@ -1,7 +1,7 @@
 package nuc.edu.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import nuc.edu.Service.UserService;
+import nuc.edu.service.UserService;
 import nuc.edu.common.utils.JwtUtil;
 import nuc.edu.common.R;
 import nuc.edu.pojo.User;
