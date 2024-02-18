@@ -1,6 +1,7 @@
 package nuc.edu.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import nuc.edu.client.UserClient;
 import nuc.edu.service.UserService;
 import nuc.edu.common.utils.JwtUtil;
 import nuc.edu.common.R;
@@ -28,6 +29,9 @@ import java.util.Map;
 public class UserController {
     @Autowired
     UserService userService;
+
+    @Autowired
+    UserClient userClient;
 
     @PostMapping("login")
     public R<String> login(@RequestBody Map map0) {

@@ -122,7 +122,7 @@
 
             sendVerificationCode: function() {
                 // 在这里添加发送验证码的逻辑
-                axios.post('localhost:8081/user/sendMsg', {
+                axios.post('http://localhost:81/user/sendMsg', {
                     phone: this.phone
                 }).then(resp => {
                     if (resp.data.success) {
@@ -142,7 +142,7 @@
 
             loginWithPhoneAndVerificationCode: function() {
 // 在这里添加使用手机号和验证码登录的逻辑
-                axios.post('localhost:8081/user/login', {
+                axios.post('http://localhost:81/user/login', {
                     phone: this.phone,
                     verificationCode: this.verificationCode
                 }).then(resp => {

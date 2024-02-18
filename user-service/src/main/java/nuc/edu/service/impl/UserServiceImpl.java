@@ -33,9 +33,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public User login(Map map) {
         String phone = map.get("phone").toString();
-        String code = map.get("code").toString();
+        String code = map.get("verificationCode").toString();
 
         String matchcode = redisTemplate.opsForValue().get(phone);
+        log.info("验证码为={}", matchcode);
 
         if (matchcode != null && matchcode.equals(code)) {
             LambdaQueryWrapper lambdaQueryWrapper = new LambdaQueryWrapper<User>()
