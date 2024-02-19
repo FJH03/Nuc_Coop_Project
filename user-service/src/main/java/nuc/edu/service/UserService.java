@@ -3,6 +3,7 @@ package nuc.edu.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import nuc.edu.pojo.User;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,4 +18,6 @@ public interface UserService extends IService<User> {
     User login(Map map);
 
     boolean sendMsg(User user);
+
+    void changestatue(List<Long> ids, byte status);
 }

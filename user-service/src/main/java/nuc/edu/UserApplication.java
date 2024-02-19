@@ -2,7 +2,6 @@ package nuc.edu;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * @Created with Intellij IDEA Ultimate 2022.02.03 正式旗舰版
@@ -13,7 +12,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @Description:添加自定义描述
  */
 @SpringBootApplication
-@EnableFeignClients
 public class UserApplication {
     public static void main(String[] args) {
         SpringApplication.run(UserApplication.class, args);

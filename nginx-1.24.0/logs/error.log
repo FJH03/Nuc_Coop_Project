@@ -1,3 +1,4 @@
 2024/02/18 13:47:47 [notice] 17100#21844: signal process started
 2024/02/18 14:03:00 [notice] 22944#24416: signal process started
 2024/02/18 14:03:00 [error] 22944#24416: OpenEvent("Global\ngx_stop_21776") failed (2: The system cannot find the file specified)
+2024/02/19 16:41:32 [error] 19308#22028: *1 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "OPTIONS /user/login HTTP/1.1", upstream: "http://127.0.0.1:8083/user/login", host: "localhost:81", referrer: "http://localhost:8080/"

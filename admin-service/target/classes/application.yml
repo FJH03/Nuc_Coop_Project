@@ -1,11 +1,22 @@
 server:
-  port: 8081
+  port: 8084
 spring:
+  application:
+    name: adminservice
   cloud:
     nacos:
       server-addr: 192.168.130.1:8848
       username: nacos
       password: nacos
+    openfeign:
+      client:
+        config:
+          default:
+            logger-level: BASIC
+      httpclient:
+        enabled: true
+        max-connections: 200
+        max-connections-per-route: 50
 
     inetutils:
       ignored-interfaces: 'VMware Virtual Ethernet Adapter for VMnet1,VMware Virtual Ethernet Adapter for VMnet8'
@@ -18,18 +29,14 @@ spring:
       database: 0
 
   datasource:
-    url: jdbc:mysql://localhost:3306/user
+    url: jdbc:mysql://localhost:3306/admin
     username: root
     password: SXY-E.YT
     driver-class-name: com.mysql.cj.jdbc.Driver
-  application:
-    name: userservice
+
 
 mybatis-plus:
-  type-aliases-package: cn.itcast.user.pojo
+  type-aliases-package: cn.itcast.admin.pojo
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-logging:
-  pattern:
-    dateformat: MM-dd HH:mm:ss:SSS

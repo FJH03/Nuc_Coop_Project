@@ -1,18 +1,15 @@
 package nuc.edu.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import nuc.edu.client.UserClient;
 import nuc.edu.service.UserService;
 import nuc.edu.common.utils.JwtUtil;
 import nuc.edu.common.R;
 import nuc.edu.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,9 +26,6 @@ import java.util.Map;
 public class UserController {
     @Autowired
     UserService userService;
-
-    @Autowired
-    UserClient userClient;
 
     @PostMapping("login")
     public R<String> login(@RequestBody Map map0) {
@@ -58,5 +52,11 @@ public class UserController {
         }
 
         return R.error("短信发送失败！");
+    }
+
+    @PostMapping("status/{statu}")
+    private void changestatus(@RequestParam List<Long> ids, @PathVariable byte statu) {
+        log.info("管理员调用本服务，参数ids = {}, status={}", ids, statu);
+        userService.changestatue(ids, statu);
     }
 }

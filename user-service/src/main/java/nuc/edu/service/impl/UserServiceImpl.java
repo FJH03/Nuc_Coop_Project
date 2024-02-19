@@ -1,6 +1,7 @@
 package nuc.edu.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import nuc.edu.mapper.UserMapper;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import nuc.edu.pojo.User;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -72,5 +74,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
 
         return false;
+    }
+
+    @Override
+    public void changestatue(List<Long> ids, byte status) {
+        LambdaUpdateWrapper lambdaUpdateWrapper = new LambdaUpdateWrapper<User>()
+                .in(User::getId, ids)
+                .set(User::getStatus, status)
+                .set(User::getUpdateTime, LocalDateTime.now());
+        this.update(lambdaUpdateWrapper);
     }
 }
