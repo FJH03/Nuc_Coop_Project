@@ -1,5 +1,6 @@
 package nuc.edu.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import nuc.edu.common.R;
 import nuc.edu.service.AdminService;
@@ -28,5 +29,11 @@ public class AdminController {
         log.info("ids = {}", ids);
         adminService.changestu(ids, statu);
         return R.success("成功操作！");
+    }
+
+    @GetMapping("page")
+    public R<Page> page(int page, int pageSize, String name) {
+        log.info("page = {}, pageSize = {}, name = {}", page, pageSize, name);
+        return R.success(adminService.page(page, pageSize, name));
     }
 }

@@ -1,5 +1,6 @@
 package nuc.edu.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import nuc.edu.pojo.Admin;
 
@@ -15,4 +16,6 @@ import java.util.List;
  */
 public interface AdminService extends IService<Admin> {
     void changestu(List<Long> ids, byte status);
+
+    Page page(int page, int pageSize, String name);
 }

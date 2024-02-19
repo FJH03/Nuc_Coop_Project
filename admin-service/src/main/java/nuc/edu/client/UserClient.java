@@ -23,5 +23,5 @@ public interface UserClient {
     @PostMapping("user/status/{statu}")
     void changestu(@RequestParam List<Long> ids,@PathVariable byte statu);
     @GetMapping("user/page")
-    R<Page> page(int page, int pageSize, String name);
+    Page page(int page, int pageSize, String name);
 }

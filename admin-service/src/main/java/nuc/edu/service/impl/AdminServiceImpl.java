@@ -1,5 +1,6 @@
 package nuc.edu.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import nuc.edu.client.UserClient;
 import nuc.edu.mapper.AdminMapper;
@@ -26,5 +27,10 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     @Override
     public void changestu(List<Long> ids, byte status) {
         userClient.changestu(ids, status);
+    }
+
+    @Override
+    public Page page(int page, int pageSize, String name) {
+        return userClient.page(page, pageSize, name);
     }
 }
