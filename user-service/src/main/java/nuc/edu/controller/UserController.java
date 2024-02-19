@@ -1,5 +1,6 @@
 package nuc.edu.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import nuc.edu.service.UserService;
 import nuc.edu.common.utils.JwtUtil;
@@ -41,6 +42,12 @@ public class UserController {
         } else {
             return R.error("用户名或密码错误");
         }
+    }
+
+    @GetMapping("page")
+    public R<Page> page(int page, int pageSize, String name) {
+        log.info("page = {}, pageSize = {}, name = {}", page, pageSize, name);
+        return R.success(userService.page(page, pageSize, name));
     }
 
     @PostMapping("sendMsg")

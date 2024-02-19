@@ -1,5 +1,6 @@
 package nuc.edu.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import nuc.edu.pojo.User;
 
@@ -20,4 +21,6 @@ public interface UserService extends IService<User> {
     boolean sendMsg(User user);
 
     void changestatue(List<Long> ids, byte status);
+
+    Page page(int page, int pageSize, String name);
 }

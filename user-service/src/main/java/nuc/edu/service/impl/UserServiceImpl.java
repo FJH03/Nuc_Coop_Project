@@ -3,6 +3,7 @@ package nuc.edu.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import nuc.edu.mapper.UserMapper;
 import nuc.edu.service.UserService;
@@ -83,5 +84,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 .set(User::getStatus, status)
                 .set(User::getUpdateTime, LocalDateTime.now());
         this.update(lambdaUpdateWrapper);
+    }
+
+    @Override
+    public Page page(int page, int pageSize, String name) {
+        //构造分页构造器
+        Page pageInfo = new Page(page, pageSize);
+
+        //构造条件构造器
+        LambdaQueryWrapper lambdaQueryWrapper = new LambdaQueryWrapper<User>()
+                .like(StringUtils.isNotEmpty(name), User::getUsername, name)
+                .orderByDesc(User::getUpdateTime);
+
+        //执行查询
+        return this.page(pageInfo, lambdaQueryWrapper);
     }
 }
