@@ -1,8 +1,9 @@
 package nuc.edu.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import nuc.edu.common.R;
+import nuc.edu.pojo.Admin;
 import nuc.edu.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,7 @@ import java.util.List;
 
 /**
  * @Created with Intellij IDEA Ultimate 2022.02.03 正式旗舰版
- * @Author: 2113042621-冯佳和
+ * @Author: 2113042619-赵彦博
  * @ClassName: AdminController
  * @Date: 2024/2/19
  * @Time: 15:54
@@ -24,16 +25,16 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    @PostMapping("status/{statu}")
-    public R<String> changestatus(@RequestParam List<Long> ids, @PathVariable byte statu) {
-        log.info("ids = {}", ids);
-        adminService.changestu(ids, statu);
-        return R.success("成功操作！");
+    @PostMapping("login")
+    public R<Admin> login(@RequestBody Admin admin) {
+        log.info("admin = {}", admin);
+        return R.success(adminService.login(admin));
     }
 
-    @GetMapping("page")
-    public R<Page> page(int page, int pageSize, String name) {
-        log.info("page = {}, pageSize = {}, name = {}", page, pageSize, name);
-        return R.success(adminService.page(page, pageSize, name));
+    @PostMapping("logout")
+    public R<String> logout(HttpServletRequest req) {
+        log.info("正在执行登出操作。");
+        req.removeAttribute("admin");
+        return R.success("管理员登出成功！");
     }
 }

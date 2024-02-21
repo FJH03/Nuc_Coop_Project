@@ -1,5 +1,14 @@
 server:
   port: 8081
+springdoc:
+  swagger-ui:
+    path:
+      /swagger-ui.html
+    csrf:
+      enabled: true
+  api-docs:
+    enabled: true
+
 spring:
   cloud:
     nacos:

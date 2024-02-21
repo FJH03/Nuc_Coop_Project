@@ -8,15 +8,6 @@ spring:
       server-addr: 192.168.130.1:8848
       username: nacos
       password: nacos
-    openfeign:
-      client:
-        config:
-          default:
-            logger-level: BASIC
-      httpclient:
-        enabled: true
-        max-connections: 200
-        max-connections-per-route: 50
 
     inetutils:
       ignored-interfaces: 'VMware Virtual Ethernet Adapter for VMnet1,VMware Virtual Ethernet Adapter for VMnet8'
