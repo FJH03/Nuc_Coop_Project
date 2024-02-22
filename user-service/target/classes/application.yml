@@ -4,6 +4,8 @@ server:
 springdoc:
   api-docs:
     path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
 
 spring:
   cloud:
@@ -31,7 +33,6 @@ spring:
     name: userservice
 
 mybatis-plus:
-  type-aliases-package: cn.itcast.user.pojo
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
