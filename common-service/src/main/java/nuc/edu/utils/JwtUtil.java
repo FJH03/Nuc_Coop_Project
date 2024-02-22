@@ -1,4 +1,4 @@
-package nuc.edu.common.utils;
+package nuc.edu.utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTCreator;

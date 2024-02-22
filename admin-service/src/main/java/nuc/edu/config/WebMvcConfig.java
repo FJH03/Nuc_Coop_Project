@@ -3,8 +3,8 @@ package nuc.edu.config;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @Created with Intellij IDEA Ultimate 2022.02.03 正式旗舰版
@@ -16,10 +16,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
  */
 @Slf4j
 @Configuration
-public class WebMvcConfig extends WebMvcConfigurationSupport {
+public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
-    protected void addCorsMappings(CorsRegistry registry) {
+    public void addCorsMappings(CorsRegistry registry) {
         // 设置允许跨域的路径
         registry.addMapping("/**")
                 // 设置允许跨域请求的域名

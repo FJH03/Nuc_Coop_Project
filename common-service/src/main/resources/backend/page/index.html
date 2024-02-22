@@ -113,49 +113,43 @@
         el: '#app',
         data() {
           return {
-            defAct: '2',
-            menuActived: '2',
+            defAct: '1',
+            menuActived: '1',
             userInfo: {},
             menuList: [
-              // {
-              //   id: '1',
-              //   name: '门店管理',
-              //   children: [
                   {
-                    id: '2',
-                    name: '成员管理',
-                    url: 'page/userlist.html',
+                    id: '1',
+                    name: '用户管理',
+                    url: './list.html',
                     icon: 'icon-member'
                   },
                   {
-                    id: '3',
+                    id: '2',
                     name: '分类管理',
-                    url: 'page/category/list.html',
+                    url: '',
                     icon: 'icon-category'
                   },
                   {
-                    id: '4',
+                    id: '3',
                     name: '菜品管理',
-                    url: 'page/food/list.html',
+                    url: '',
                     icon: 'icon-food'
                   },
                   {
-                    id: '5',
+                    id: '4',
                     name: '套餐管理',
-                    url: 'page/combo/list.html',
+                    url: '',
                     icon: 'icon-combo'
                   },
                   {
-                    id: '6',
+                    id: '5',
                     name: '订单明细',
-                    url: 'page/order/list.html',
+                    url: '',
                     icon: 'icon-order'
                   }
-              //   ],
-              // },
             ],
-            iframeUrl: 'page/member/list.html',
-            headTitle: '员工管理',
+            iframeUrl: './list.html',
+            headTitle: '用户管理',
             goBackFlag: false,
             loading: true,
             timer: null

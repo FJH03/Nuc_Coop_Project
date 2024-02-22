@@ -99,4 +99,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         //执行查询
         return this.page(pageInfo, lambdaQueryWrapper);
     }
+
+    @Override
+    public User getUserById(long id) {
+        User u = this.getById(id);
+        u.setUpdateTime(LocalDateTime.now());
+        return u;
+    }
 }

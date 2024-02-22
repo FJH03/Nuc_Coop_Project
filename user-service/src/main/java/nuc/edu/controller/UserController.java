@@ -1,11 +1,13 @@
 package nuc.edu.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import nuc.edu.service.UserService;
-import nuc.edu.common.utils.JwtUtil;
 import nuc.edu.common.R;
 import nuc.edu.pojo.User;
+import nuc.edu.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,10 +26,11 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("user")
+@Tag(name = "用户服务WEB访问接口")
 public class UserController {
     @Autowired
     UserService userService;
-
+    @Operation(summary = "用户登陆")
     @PostMapping("login")
     public R<String> login(@RequestBody Map map0) {
         log.info(map0.toString());
@@ -44,12 +47,14 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "用户页的分页查询")
     @GetMapping("page")
     public R<Page> page(int page, int pageSize, String name) {
         log.info("page = {}, pageSize = {}, name = {}", page, pageSize, name);
         return R.success(userService.page(page, pageSize, name));
     }
 
+    @Operation(summary = "发送短信验证码")
     @PostMapping("sendMsg")
     public R<String> sendMsg(@RequestBody User user) {
         log.info("user = {}", user);
@@ -61,9 +66,18 @@ public class UserController {
         return R.error("短信发送失败！");
     }
 
-    @PostMapping("status/{statu}")
-    private void changestatus(@RequestParam List<Long> ids, @PathVariable byte statu) {
-        log.info("管理员调用本服务，参数ids = {}, status={}", ids, statu);
-        userService.changestatue(ids, statu);
+    @Operation(summary = "更新用户数据")
+    @PutMapping
+    private R<String> update(@RequestBody User user) {
+        log.info("user = {}", user);
+        userService.updateById(user);
+        return R.success("修改成功！");
+    }
+
+    @Operation(summary = "通过id获得用户实体")
+    @GetMapping("/{id}")
+    public R<User> getUserById(@PathVariable long id) {
+        log.info("id = {}", id);
+        return R.success(userService.getUserById(id));
     }
 }

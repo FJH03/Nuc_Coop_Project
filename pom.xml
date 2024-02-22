@@ -66,6 +66,9 @@
 
 
     </dependencyManagement>
+    <dependencies>
+
+    </dependencies>
 
     <build>
         <plugins>

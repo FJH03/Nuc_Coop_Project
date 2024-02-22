@@ -23,4 +23,6 @@ public interface UserService extends IService<User> {
     void changestatue(List<Long> ids, byte status);
 
     Page page(int page, int pageSize, String name);
+
+    User getUserById(long id);
 }
