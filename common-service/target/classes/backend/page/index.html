@@ -118,19 +118,19 @@
             userInfo: {},
             menuList: [
                   {
-                    id: '1',
+                    id: '2',
                     name: '用户管理',
-                    url: './userlist.html',
+                    url: './user/html/userlist.html',
                     icon: 'icon-member'
                   },
                   {
-                    id: '2',
+                    id: '3',
                     name: '课程管理',
-                    url: './courselist.html',
+                    url: './course/html/courselist.html',
                     icon: 'icon-category'
                   }
             ],
-            iframeUrl: './userlist.html',
+            iframeUrl: './user/html/userlist.html',
             headTitle: '用户管理',
             goBackFlag: false,
             loading: true,
@@ -157,7 +157,7 @@
             logoutApi().then((res)=>{
               if(res.code === 1){
                 localStorage.removeItem('userInfo')
-                window.location.href = '/backend/page/login.html'
+                window.location.href = 'login.html'
               }
             })
           },

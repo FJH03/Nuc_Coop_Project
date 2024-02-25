@@ -27,7 +27,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/course
     username: root
-    password: 1234
+    password: SXY-E.YT
     driver-class-name: com.mysql.cj.jdbc.Driver
   application:
     name: courseservice

@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <!-- 引入样式 -->
-  <link rel="stylesheet" href="../plugins/element-ui/index.css" />
-  <link rel="stylesheet" href="../styles/common.css" />
-  <link rel="stylesheet" href="../styles/page.css" />
+  <link rel="stylesheet" href="../../../plugins/element-ui/index.css" />
+  <link rel="stylesheet" href="../../../styles/common.css" />
+  <link rel="stylesheet" href="../../../styles/page.css" />
   <style>
     #member-app  .notAdmin::after{
       border: 0 !important;
@@ -17,12 +17,12 @@
   </style>
 </head>
 <body>
-  <div class="dashboard-container" id="member-app">
+  <div class="dashboard-container" id="user-app">
     <div class="container">
       <div class="tableBar">
         <el-input
           v-model="input"
-          placeholder="请输入用户姓名"
+          placeholder="请输入用户名查找"
           style="width: 250px"
           clearable
            @keyup.enter.native="handleQuery"
@@ -34,12 +34,6 @@
             @click="handleQuery"
           ></i>
         </el-input>
-        <el-button
-          type="primary"
-          @click="addMemberHandle('add')"
-        >
-          + 添加员工
-        </el-button>
       </div>
       <el-table
         :data="tableData"
@@ -120,16 +114,16 @@
     </div>
   </div>
     <!-- 开发环境版本，包含了有帮助的命令行警告 -->
-    <script src="../../js/vue.js"></script>
+    <script src="../../../../js/vue.js"></script>
     <!-- 引入组件库 -->
-    <script src="../plugins/element-ui/index.js"></script>
+    <script src="../../../plugins/element-ui/index.js"></script>
     <!-- 引入axios -->
-    <script src="../../js/axios.min.js"></script>
-    <script src="../js/request.js"></script>
-    <script src="../js/member.js"></script>
+    <script src="../../../../js/axios.min.js"></script>
+    <script src="../../../js/request.js"></script>
+    <script src="../js/user.js"></script>
     <script>
       new Vue({
-        el: '#member-app',
+        el: '#user-app',
         data() {
           return {
              input: '',
@@ -170,19 +164,12 @@
           },
            // 添加
           addMemberHandle (st) {
-            if (st === 'add') {
-              window.parent.menuHandle({
-                id: '2',
-                url: '/backend/page/member/add.html',
-                name: '添加员工'
-              },true)
-            } else {
-              window.parent.menuHandle({
-                id: '2',
-                url: '/backend/page/add.html?id='+st,
-                name: '修改员工'
-              },true)
-            }
+            window.parent.menuHandle({
+              id: '2',
+              url: '/backend/page/user/html/userset.html?id='+st,
+              name: '修改员工'
+            },true)
+
           },
           //状态修改
           statusHandle (row) {
@@ -193,7 +180,7 @@
               'cancelButtonText': '取消',
               'type': 'warning'
               }).then(() => {
-              enableOrDisableEmployee({ 'id': this.id, 'status': !this.status ? 1 : 0 }).then(res => {
+              enableOrDisableUser({ 'id': this.id, 'status': !this.status ? 1 : 0 }).then(res => {
                 console.log('enableOrDisableEmployee',res)
                 if (String(res.code) === '1') {
                   this.$message.success('账号状态更改成功！')

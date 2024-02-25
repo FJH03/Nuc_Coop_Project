@@ -7,7 +7,7 @@ function getUserList (params) {
 }
 
 // 修改---启用禁用接口
-function enableOrDisableEmployee (params) {
+function enableOrDisableUser (params) {
   return $axios({
     url: 'http://localhost:81/user',
     method: 'put',
@@ -15,14 +15,6 @@ function enableOrDisableEmployee (params) {
   })
 }
 
-// 新增---添加员工
-function addEmployee (params) {
-  return $axios({
-    url: '/employee',
-    method: 'post',
-    data: { ...params }
-  })
-}
 
 // 修改---添加员工
 function editUser (params) {
