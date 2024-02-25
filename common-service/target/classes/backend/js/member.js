@@ -25,7 +25,7 @@ function addEmployee (params) {
 }
 
 // 修改---添加员工
-function editEmployee (params) {
+function editUser (params) {
   return $axios({
     url: 'http://localhost:81/user',
     method: 'put',
@@ -34,7 +34,7 @@ function editEmployee (params) {
 }
 
 // 修改页面反查详情接口
-function queryEmployeeById (id) {
+function queryUserById (id) {
   return $axios({
     url: `http://localhost:81/user/${id}`,
     method: 'get'

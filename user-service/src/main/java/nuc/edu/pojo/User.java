@@ -30,5 +30,5 @@ public class User {
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
     private String remark;
-    private Integer type;
+    private byte type;
 }

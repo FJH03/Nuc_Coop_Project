@@ -1,6 +1,7 @@
 package nuc.edu.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import nuc.edu.mapper.CourseMapper;
 import nuc.edu.pojo.Course;
@@ -44,6 +45,11 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         course.setCreateTime(LocalDateTime.now());
         course.setUpdateTime(LocalDateTime.now());
         courseMapper.insert(course);
+    }
+
+    @Override
+    public Page page(int page, int pageSize, String name) {
+        return null;
     }
 
     @Override

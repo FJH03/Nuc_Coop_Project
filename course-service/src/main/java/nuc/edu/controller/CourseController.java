@@ -1,5 +1,6 @@
 package nuc.edu.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -92,5 +93,12 @@ public class CourseController {
         }
         courseService.deleteByCourseId(courseId);
         return R.success(null);
+    }
+
+    @Operation(summary = "课程页的分页查询")
+    @GetMapping("page")
+    public R<Page> page(int page, int pageSize, String name) {
+        log.info("page = {}, pageSize = {}, name = {}", page, pageSize, name);
+        return R.success(courseService.page(page, pageSize, name));
     }
 }

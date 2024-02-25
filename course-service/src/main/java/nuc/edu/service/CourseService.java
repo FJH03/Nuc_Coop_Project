@@ -1,5 +1,6 @@
 package nuc.edu.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import nuc.edu.pojo.Course;
 
@@ -23,4 +24,6 @@ public interface CourseService extends IService<Course> {
     void deleteByCourseId(Long courseId);
 
     void create(Course course);
+
+    Page page(int page, int pageSize, String name);
 }

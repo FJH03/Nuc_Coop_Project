@@ -20,6 +20,7 @@ public class Course {
     private Long id;
     private String coursename;
     private String content;
+    private byte courseType;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
 }
