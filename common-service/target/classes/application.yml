@@ -12,3 +12,9 @@ spring:
 
   application:
     name: commonservice
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/zwf_common_db
+    username: root
+    password: SXY-E.YT
+    driver-class-name: com.mysql.cj.jdbc.Driver

@@ -1,4 +1,4 @@
-use user;
+use zwf_user_db;
 DROP table if exists user;
 create table user (
                       id bigint primary key auto_increment comment '用户表主键',
@@ -16,5 +16,5 @@ create table user (
 ) comment = '用户信息表';
 
 
-INSERT INTO user.user (id, password, gender, email, avatar_url, phone, status, create_time, update_time, remark, type) VALUES (null, null, 0, null, null, '13303450011', 0, '2024-02-19', '2024-02-22', '这个用户很懒，还没做自我介绍', 0);
-INSERT INTO user.user (id, password, gender, email, avatar_url, phone, status, create_time, update_time, remark, type) VALUES (null, null, 1, null, null, '13935593239', 1, '2024-02-19', '2024-02-19', '这个用户很懒，还没做自我介绍', 1);
+INSERT INTO zwf_user_db.user (id, password, gender, email, avatar_url, phone, status, create_time, update_time, remark, type) VALUES (null, null, 0, null, null, '13303450011', 0, '2024-02-19', '2024-02-22', '这个用户很懒，还没做自我介绍', 0);
+INSERT INTO zwf_user_db.user (id, password, gender, email, avatar_url, phone, status, create_time, update_time, remark, type) VALUES (null, null, 0, null, null, '13935593239', 1, '2024-02-19', '2024-02-19', '这个用户很懒，还没做自我介绍', 1);

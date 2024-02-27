@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import nuc.edu.anno.Log;
 import nuc.edu.common.R;
 import nuc.edu.pojo.Course;
 import nuc.edu.service.CourseService;
@@ -36,6 +37,7 @@ public class CourseController {
     }
 
     @Operation(summary = "创建课程")
+    @Log
     @PostMapping("/create")
     public R<String> create(@Parameter(name = "course", description = "课程实体") Course course) {
         courseService.add(course);
@@ -43,6 +45,7 @@ public class CourseController {
     }
 
     @Operation(summary = "修改课程")
+    @Log
     @PutMapping
     public R<String> modify(@Parameter(name = "course", description = "课程实体") @RequestBody Course course) {
         log.info("course = {}", course);
@@ -59,6 +62,7 @@ public class CourseController {
     }
 
     @Operation(summary = "根据id删除课程")
+    @Log
     @DeleteMapping("{id}")
     public R<String> delete(@Parameter(name = "id", description = "课程id") @PathVariable Long id) {
         courseService.removeById(id);
