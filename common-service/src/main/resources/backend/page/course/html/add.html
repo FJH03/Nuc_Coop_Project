@@ -57,7 +57,6 @@
       <el-form-item
               label="课程名称:"
               prop="coursename"
-
       >
         <el-input
                 v-model="ruleForm.coursename"
@@ -161,22 +160,43 @@
           }
         })
       },
-      submitForm (formName) {
+      submitForm (formName, st) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            const params = {
-              ...this.ruleForm,
-            }
-            editCourse(params).then(res => {
-              if (res.code === 1) {
-                this.$message.success('课程修改成功！')
-                this.goBack()
-              } else {
-                this.$message.error(res.msg || '操作失败')
+            if (this.actionType === 'add') {
+              const params = {
+                ...this.ruleForm,
               }
-            }).catch(err => {
-              this.$message.error('请求出错了：' + err)
-            })
+              addCourse(params).then(res => {
+                if (res.code === 1) {
+                  this.$message.success('课程添加成功！')
+                  if (!st) {
+                    this.goBack()
+                  } else {
+
+                  }
+                } else {
+                  this.$message.error(res.msg || '操作失败')
+                }
+              }).catch(err => {
+                this.$message.error('请求出错了：' + err)
+              })
+            } else {
+              const params = {
+                ...this.ruleForm,
+              }
+
+              editCourse(params).then(res => {
+                if (res.code === 1) {
+                  this.$message.success('课程修改成功！')
+                  this.goBack()
+                } else {
+                  this.$message.error(res.msg || '操作失败')
+                }
+              }).catch(err => {
+                this.$message.error('请求出错了：' + err)
+              })
+            }
           } else {
             console.log('error submit!!')
             return false

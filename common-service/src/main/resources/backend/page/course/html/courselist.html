@@ -91,6 +91,14 @@
           >
             编辑
           </el-button>
+          <el-button
+                  type="text"
+                  size="small"
+                  class="delBut non"
+                  @click="statusHandle(scope.row)"
+          >
+            删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -170,6 +178,24 @@
             name: '修改课程'
           },true)
         }
+      },
+      statusHandle (row) {
+        this.id = row.id
+        this.$confirm('确认删除该课程？', '提示', {
+          'confirmButtonText': '确定',
+          'cancelButtonText': '取消',
+          'type': 'warning'
+        }).then(() => {
+          deleteCourse({'id': this.id}).then(res => {
+            console.log('deleteCourse', res)
+            if (String(res.code) === '1') {
+              this.$message.success('成功删除课程!')
+              this.handleQuery()
+            }
+          }).catch(err => {
+            this.$message.error('请求出错了：' + err)
+          })
+        })
       },
       handleSizeChange (val) {
         this.pageSize = val

@@ -44,7 +44,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     @Override
     public void add(Course course) {
         course.setCreateTime(LocalDateTime.now());
-        course.setCreateTime(LocalDateTime.now());
+        course.setUpdateTime(LocalDateTime.now());
         this.save(course);
     }
 

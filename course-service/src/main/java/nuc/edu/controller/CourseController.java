@@ -38,8 +38,9 @@ public class CourseController {
 
     @Operation(summary = "创建课程")
     @Log
-    @PostMapping("/create")
-    public R<String> create(@Parameter(name = "course", description = "课程实体") Course course) {
+    @PostMapping
+    public R<String> create(@Parameter(name = "course", description = "课程实体") @RequestBody Course course) {
+        log.info("course = {}", course);
         courseService.add(course);
         return R.success("创建成功！");
     }
@@ -63,8 +64,9 @@ public class CourseController {
 
     @Operation(summary = "根据id删除课程")
     @Log
-    @DeleteMapping("{id}")
-    public R<String> delete(@Parameter(name = "id", description = "课程id") @PathVariable Long id) {
+    @DeleteMapping
+    public R<String> delete(@Parameter(name = "id", description = "课程id") Long id) {
+        log.info("id = {}", id);
         courseService.removeById(id);
         return R.success("删除成功！");
     }

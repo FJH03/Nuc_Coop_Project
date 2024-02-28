@@ -8,7 +8,7 @@ create table user (
                       email varchar(20) comment '邮箱地址',
                       avatar_url varchar(20) comment '头像',
                       phone varchar(15) not null comment '手机号',
-                      status tinyint not null default 0 comment '状态0正常1封禁',
+                      status tinyint not null default 0 comment '状态1正常0封禁',
                       create_time DATE not null comment '创建时间',
                       update_time DATE not null comment '修改时间',
                       remark varchar(50) default '这个用户很懒，还没做自我介绍' comment '自我介绍',
