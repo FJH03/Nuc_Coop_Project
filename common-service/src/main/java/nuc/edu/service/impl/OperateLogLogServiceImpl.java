@@ -15,5 +15,4 @@ import nuc.edu.pojo.OperateLog;
  * @Description:添加自定义描述
  */
 @Service
-public class OperateLogLogServiceImpl extends ServiceImpl<OperateLogMapper, OperateLog> implements OperateLogService {
-}
+public class OperateLogLogServiceImpl extends ServiceImpl<OperateLogMapper, OperateLog> implements OperateLogService {}

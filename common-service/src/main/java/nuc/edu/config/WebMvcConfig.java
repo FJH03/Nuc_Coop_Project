@@ -1,7 +1,10 @@
 package nuc.edu.config;
 
 import lombok.extern.slf4j.Slf4j;
+import nuc.edu.interceptor.LoginCheckInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -16,6 +19,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Slf4j
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
+    @Autowired
+    LoginCheckInterceptor loginCheckInterceptor;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -23,5 +28,19 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/front/**").addResourceLocations("classpath:/front/");
         registry.addResourceHandler("/backend/**").addResourceLocations("classpath:/backend/");
         registry.addResourceHandler("/js/**").addResourceLocations("classpath:/js/");
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        String[] path = new String[] {
+                "/js/**",
+                "/backend/page/login.html",
+                "/backend/images/**",
+                "/backend/js/**",
+                "/backend/plugins/**",
+                "/backend/styles/**",
+                "/backend/favicon.ico"
+        };
+        registry.addInterceptor(loginCheckInterceptor).addPathPatterns("/**").excludePathPatterns(path);
     }
 }

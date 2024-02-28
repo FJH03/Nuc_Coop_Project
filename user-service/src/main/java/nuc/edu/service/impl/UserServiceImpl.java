@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
+import nuc.edu.anno.Log;
 import nuc.edu.mapper.UserMapper;
 import nuc.edu.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -77,6 +78,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return false;
     }
 
+    @Log
     @Override
     public void changestatue(List<Long> ids, byte status) {
         LambdaUpdateWrapper lambdaUpdateWrapper = new LambdaUpdateWrapper<User>()

@@ -1,10 +1,7 @@
 package nuc.edu.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import nuc.edu.pojo.Admin;
-
-import java.util.List;
 
 /**
  * @Created with Intellij IDEA Ultimate 2022.02.03 正式旗舰版
@@ -17,4 +14,6 @@ import java.util.List;
 public interface AdminService extends IService<Admin> {
 
     Admin login(Admin admin);
+
+    void logout();
 }

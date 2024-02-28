@@ -46,9 +46,7 @@ public class LogAspect {
 
         LocalDateTime now = LocalDateTime.now();
 
-        OperateLog operateLog = new OperateLog( null,  null , now, className, methonName, methodParms, returnValue, costTime);
-
-        operateLog.setOperateUser(adminid);
+        OperateLog operateLog = new OperateLog( null,  adminid, now, className, methonName, methodParms, returnValue, costTime);
 
         operateLogService.save(operateLog);
         return result;

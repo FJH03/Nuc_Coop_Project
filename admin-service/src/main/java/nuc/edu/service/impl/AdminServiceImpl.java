@@ -1,17 +1,20 @@
 package nuc.edu.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import nuc.edu.mapper.AdminMapper;
 import nuc.edu.pojo.Admin;
 import nuc.edu.service.AdminService;
+import nuc.edu.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
+import static nuc.edu.service.impl.SessionServiceImpl.ADMIN_SESSION;
 
 /**
  * @Created with Intellij IDEA Ultimate 2022.02.03 正式旗舰版
@@ -23,11 +26,10 @@ import java.util.List;
  */
 @Service
 public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements AdminService {
-
     @Autowired
-    HttpServletRequest request;
-
-
+    HttpServletRequest req;
+    @Autowired
+    SessionService sessionService;
     @Override
     public Admin login(Admin admin) {
         String password = DigestUtils.md5DigestAsHex(admin.getPassword().getBytes());
@@ -40,7 +42,14 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         }
 
         //登陆成功逻辑
-        request.getSession().setAttribute("admin", admin.getId());
+        Map<String, String> sessionData = new HashMap<>();
+        sessionData.put("admin", GM.getId().toString());
+        sessionService.createOrUpdateSession(ADMIN_SESSION ,sessionData);
         return GM;
+    }
+
+    @Override
+    public void logout() {
+        sessionService.removeSession(ADMIN_SESSION,"admin");
     }
 }

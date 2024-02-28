@@ -6,21 +6,30 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
+            padding-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            padding: 20px;
+            background-image: url("../image/background.jpg");
+            background-size: cover;
+            background-position: center;
         }
 
         .login-container {
             max-width: 400px;
-            margin: 0 auto;
-            background-color: #f7f7f7;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 0 auto 0 10px;
+            background-color: #d0dfe6;
+            opacity: 0.8;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0,0.1);
         }
 
         .login-form {
             margin-top: 30px;
+
         }
 
         .login-form h2 {
@@ -29,11 +38,11 @@
         }
 
         .login-form input {
-            width: 100%;
+            width: 95%;
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
-            border-radius: 3px;
+            border-radius: 5px;
         }
 
         .login-form button {
@@ -47,25 +56,39 @@
         }
 
         .login-form button:hover {
-            background-color: #45a049;
+            background-color: #93b5cf;
         }
 
         .login-type {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .login-type button {
-            width: 50%;
+            width: 35%;
             display: block;
             margin: 0 auto;
         }
+
+        h1 {
+            padding-bottom: 700px;
+            padding-left: 500px;
+            color: #68b88e ; /* 设置标题文本颜色为白色 */
+            font-size: 60px; /* 设置标题文本字体大小 */
+            font-weight: bold; /* 设置标题文本字体粗细 */
+            font-family: SimSun, sans-serif;
+        }
+
     </style>
 </head>
 
 <body>
+<div>
+    <h1>校企慧公共服务平台</h1>
+</div>
 <div class="login-container">
     <div class="login-form">
-        <h2>请选择登录方式</h2>
+
+        <h2>登录方式</h2>
 
         <div class="login-type" v-if="!isPhoneLogin">
             <button @click="switchToPhoneLogin">手机号/验证码登录</button>

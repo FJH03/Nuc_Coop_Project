@@ -2,7 +2,6 @@ package nuc.edu.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import nuc.edu.common.R;
 import nuc.edu.pojo.Admin;
@@ -35,9 +34,9 @@ public class AdminController {
 
     @Operation(summary = "管理员登出")
     @PostMapping("logout")
-    public R<String> logout(HttpServletRequest req) {
+    public R<String> logout() {
         log.info("正在执行登出操作。");
-        req.removeAttribute("admin");
+        adminService.logout();
         return R.success("管理员登出成功！");
     }
 }

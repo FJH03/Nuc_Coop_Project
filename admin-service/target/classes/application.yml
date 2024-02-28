@@ -27,7 +27,7 @@ spring:
       database: 0
 
   datasource:
-    url: jdbc:mysql://localhost:3306/admin
+    url: jdbc:mysql://localhost:3306/zwf_admin_db
     username: root
     password: SXY-E.YT
     driver-class-name: com.mysql.cj.jdbc.Driver
