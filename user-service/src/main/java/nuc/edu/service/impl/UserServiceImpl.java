@@ -1,11 +1,9 @@
 package nuc.edu.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
-import nuc.edu.anno.Log;
 import nuc.edu.mapper.UserMapper;
 import nuc.edu.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Service;
 import nuc.edu.pojo.User;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -31,7 +28,6 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
-
     @Autowired
     StringRedisTemplate redisTemplate;
     @Override
@@ -40,7 +36,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         String code = map.get("verificationCode").toString();
 
         String matchcode = redisTemplate.opsForValue().get(phone);
-        log.info("验证码为={}", matchcode);
+        log.info("验证码为 = {}", matchcode);
 
         if (matchcode != null && matchcode.equals(code)) {
             LambdaQueryWrapper lambdaQueryWrapper = new LambdaQueryWrapper<User>()
@@ -78,16 +74,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return false;
     }
 
-    @Log
-    @Override
-    public void changestatue(List<Long> ids, byte status) {
-        LambdaUpdateWrapper lambdaUpdateWrapper = new LambdaUpdateWrapper<User>()
-                .in(User::getId, ids)
-                .set(User::getStatus, status)
-                .set(User::getUpdateTime, LocalDateTime.now());
-        this.update(lambdaUpdateWrapper);
-    }
-
     @Override
     public Page page(int page, int pageSize, String name) {
         //构造分页构造器
@@ -104,8 +90,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public User getUserById(long id) {
-        User u = this.getById(id);
-        u.setUpdateTime(LocalDateTime.now());
-        return u;
+        return this.getById(id);
+    }
+
+    @Override
+    public void updateUserById(User user) {
+        user.setUpdateTime(LocalDateTime.now());
+        this.updateById(user);
     }
 }

@@ -3,6 +3,7 @@ package nuc.edu.service.impl;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import nuc.edu.anno.Log;
 import nuc.edu.mapper.AdminMapper;
 import nuc.edu.pojo.Admin;
 import nuc.edu.service.AdminService;

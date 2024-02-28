@@ -39,7 +39,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 "/backend/js/**",
                 "/backend/plugins/**",
                 "/backend/styles/**",
-                "/backend/favicon.ico"
+                "/backend/favicon.ico",
+                "/front/image/**",
+                "/front/js/**",
+                "/front/page/login.html"
         };
         registry.addInterceptor(loginCheckInterceptor).addPathPatterns("/**").excludePathPatterns(path);
     }

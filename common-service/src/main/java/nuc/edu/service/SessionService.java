@@ -13,6 +13,5 @@ import java.util.Map;
 public interface SessionService {
     void createOrUpdateSession(String tag, Map<String, String> sessionData);
     String getSession(String tag, String sessionId);
-
     void removeSession(String tag, String sessionId);
 }

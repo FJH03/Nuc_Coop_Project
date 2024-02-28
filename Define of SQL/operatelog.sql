@@ -1,4 +1,4 @@
-use zwf_common_db;
+#使用所需要的数据库
 drop table  if exists operate_log;
 create table operate_log
 (

@@ -3,6 +3,7 @@ package nuc.edu.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import nuc.edu.anno.Log;
 import nuc.edu.common.R;
 import nuc.edu.pojo.Admin;
 import nuc.edu.service.AdminService;
@@ -26,6 +27,7 @@ public class AdminController {
     private AdminService adminService;
 
     @Operation(summary = "管理员登陆")
+    @Log
     @PostMapping("login")
     public R<Admin> login(@RequestBody Admin admin) {
         log.info("admin = {}", admin);
@@ -33,6 +35,7 @@ public class AdminController {
     }
 
     @Operation(summary = "管理员登出")
+    @Log
     @PostMapping("logout")
     public R<String> logout() {
         log.info("正在执行登出操作。");

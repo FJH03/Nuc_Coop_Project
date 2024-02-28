@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 public class OperateLog {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
-    private Long operateUser;
+    private Object operateUser;
     private LocalDateTime operateTime;
     private String className;
     private String methodName;

@@ -3,13 +3,18 @@ package nuc.edu.aop;
 import com.alibaba.fastjson.JSON;
 import jakarta.servlet.http.HttpServletRequest;
 import nuc.edu.service.OperateLogService;
+import nuc.edu.service.SessionService;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import nuc.edu.pojo.OperateLog;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+
+import static nuc.edu.service.impl.SessionServiceImpl.ADMIN_SESSION;
 
 /**
  * @Created with Intellij IDEA Ultimate 2022.02.03 正式旗舰版
@@ -19,16 +24,17 @@ import java.util.Arrays;
  * @Time: 14:53
  * @Description:添加自定义描述
  */
+@Component
+@Aspect
 public class LogAspect {
     @Autowired
-    HttpServletRequest req;
-
-    @Autowired
     OperateLogService operateLogService;
+    @Autowired
+    SessionService sessionService;
 
     @Around("@annotation(nuc.edu.anno.Log)")
-    public Object reccordLog(ProceedingJoinPoint joinPoint) throws Throwable {
-        Long adminid = (Long) req.getSession().getAttribute("admin");
+    public Object recordLog(ProceedingJoinPoint joinPoint) throws Throwable {
+        Object adminid = sessionService.getSession(ADMIN_SESSION, "admin");
 
         String className = joinPoint.getTarget().getClass().getName();
 

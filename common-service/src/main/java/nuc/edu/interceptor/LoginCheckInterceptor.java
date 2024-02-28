@@ -27,7 +27,6 @@ import static nuc.edu.service.impl.SessionServiceImpl.ADMIN_SESSION;
 public class LoginCheckInterceptor implements HandlerInterceptor {
     @Autowired
     private SessionService sessionService;
-
     @Override
     public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler) throws IOException {
         String url = req.getRequestURI();

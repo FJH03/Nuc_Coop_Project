@@ -1,5 +1,6 @@
 package nuc.edu.service.impl;
 
+import nuc.edu.anno.Log;
 import nuc.edu.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -20,10 +21,12 @@ import java.util.concurrent.TimeUnit;
 public class SessionServiceImpl implements SessionService {
     @Autowired
     StringRedisTemplate redisTemplate;
-
     public static final String ADMIN_SESSION = "ADMIN_SESSION";
 
+    public static final String USER_AUTHORIZATION = "USER_AUTHORIZATION";
+
     // 创建或更新会话信息
+    @Log
     public void createOrUpdateSession(String tag, Map<String, String> sessionData) {
         sessionData.forEach((k, v) -> {
             redisTemplate.opsForValue().set(tag + "_" + k, v, 30, TimeUnit.MINUTES);
@@ -36,6 +39,7 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
+    @Log
     public void removeSession(String tag, String sessionId) {
         redisTemplate.delete(tag + "_" + sessionId);
     }

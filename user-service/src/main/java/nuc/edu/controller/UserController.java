@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import nuc.edu.anno.Log;
 import nuc.edu.service.UserService;
 import nuc.edu.common.R;
 import nuc.edu.pojo.User;
@@ -12,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,7 +21,7 @@ import java.util.Map;
  * @ClassName: UserController
  * @Date: 2024/2/17
  * @Time: 11:17
- * @Description:添加自定义描述
+ * @Description:添加自定义描述(不要在该层使用AOP日志@Log注解,存在bug)
  */
 @Slf4j
 @RestController
@@ -29,7 +29,7 @@ import java.util.Map;
 @Tag(name = "用户服务WEB访问接口")
 public class UserController {
     @Autowired
-    UserService userService;
+    private UserService userService;
     @Operation(summary = "用户登陆")
     @PostMapping("login")
     public R<String> login(@RequestBody Map map0) {
@@ -68,9 +68,9 @@ public class UserController {
 
     @Operation(summary = "更新用户数据")
     @PutMapping
-    private R<String> update(@RequestBody User user) {
+    private R<String> updateUserById(@RequestBody User user) {
         log.info("user = {}", user);
-        userService.updateById(user);
+        userService.updateUserById(user);
         return R.success("修改成功！");
     }
 

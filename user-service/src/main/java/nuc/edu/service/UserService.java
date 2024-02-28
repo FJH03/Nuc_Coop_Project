@@ -20,9 +20,9 @@ public interface UserService extends IService<User> {
 
     boolean sendMsg(User user);
 
-    void changestatue(List<Long> ids, byte status);
-
     Page page(int page, int pageSize, String name);
 
     User getUserById(long id);
+
+    void updateUserById(User user);
 }
