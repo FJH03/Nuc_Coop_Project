@@ -28,6 +28,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/front/**").addResourceLocations("classpath:/front/");
         registry.addResourceHandler("/backend/**").addResourceLocations("classpath:/backend/");
         registry.addResourceHandler("/js/**").addResourceLocations("classpath:/js/");
+        registry.addResourceHandler("/images/**").addResourceLocations("classpath:/images/");
+        registry.addResourceHandler("/plugins/**").addResourceLocations("classpath:/plugins/");
+        registry.addResourceHandler("/styles/**").addResourceLocations("classpath:/styles/");
     }
 
     @Override
@@ -35,14 +38,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
         String[] path = new String[] {
                 "/js/**",
                 "/backend/page/login.html",
-                "/backend/images/**",
+                "/images/**",
                 "/backend/js/**",
-                "/backend/plugins/**",
-                "/backend/styles/**",
-                "/backend/favicon.ico",
-                "/front/image/**",
-                "/front/js/**",
-                "/front/page/login.html"
+                "/plugins/**",
+                "/styles/**",
+                "/front/page/login.html",
+                "/front/js/**"
         };
         registry.addInterceptor(loginCheckInterceptor).addPathPatterns("/**").excludePathPatterns(path);
     }

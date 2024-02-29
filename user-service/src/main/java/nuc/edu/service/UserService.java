@@ -16,7 +16,7 @@ import java.util.Map;
  * @Description:添加自定义描述
  */
 public interface UserService extends IService<User> {
-    User login(Map map);
+    String login(Map map);
 
     boolean sendMsg(User user);
 
@@ -25,4 +25,6 @@ public interface UserService extends IService<User> {
     User getUserById(long id);
 
     void updateUserById(User user);
+
+    void logout();
 }

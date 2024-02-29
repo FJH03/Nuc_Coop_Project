@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="course-service" />
+        <module name="resume-service" />
         <module name="user-service" />
         <module name="common-service" />
         <module name="admin-service" />
@@ -20,6 +21,7 @@
       <module name="admin-service" options="-parameters" />
       <module name="common-service" options="-parameters" />
       <module name="course-service" options="-parameters" />
+      <module name="resume-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>

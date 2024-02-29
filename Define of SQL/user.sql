@@ -12,7 +12,7 @@ create table user (
                       create_time DATE not null comment '创建时间',
                       update_time DATE not null comment '修改时间',
                       remark varchar(50) default '这个用户很懒，还没做自我介绍' comment '自我介绍',
-                      type tinyint not null default 2 comment '用户类型0老师，1学生, 2未知'
+                      type tinyint comment '用户职业类型'
 ) comment = '用户信息表';
 
 

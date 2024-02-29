@@ -5,8 +5,10 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import nuc.edu.mapper.UserMapper;
+import nuc.edu.service.SessionService;
 import nuc.edu.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import nuc.edu.utils.JwtUtil;
 import nuc.edu.utils.ValidateCodeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -14,8 +16,12 @@ import org.springframework.stereotype.Service;
 import nuc.edu.pojo.User;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import static nuc.edu.service.impl.SessionServiceImpl.ADMIN_SESSION;
+import static nuc.edu.service.impl.SessionServiceImpl.USER_AUTHORIZATION;
 
 /**
  * @Created with Intellij IDEA Ultimate 2022.02.03 正式旗舰版
@@ -30,8 +36,10 @@ import java.util.concurrent.TimeUnit;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     @Autowired
     StringRedisTemplate redisTemplate;
+    @Autowired
+    private SessionService sessionService;
     @Override
-    public User login(Map map) {
+    public String login(Map map) {
         String phone = map.get("phone").toString();
         String code = map.get("verificationCode").toString();
 
@@ -50,11 +58,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 this.save(u);
             }
 
+            Map<String, String> map0 = new HashMap<>();
+            map0.put("id", String.valueOf(u.getId()));
+            map0.put("phone", u.getPhone());
+
+            String str = JwtUtil.getToken(map0);
+
+            Map<String, String> sessiondata = new HashMap<>();
+            sessiondata.put("user", str);
+
+            sessionService.createOrUpdateSession(USER_AUTHORIZATION, sessiondata);
             redisTemplate.delete(phone);
-            return u;
+
+            return "登陆成功！";
         }
 
-        return null;
+        return "登录失败！";
     }
 
     @Override
@@ -97,5 +116,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public void updateUserById(User user) {
         user.setUpdateTime(LocalDateTime.now());
         this.updateById(user);
+    }
+
+    @Override
+    public void logout() {
+        sessionService.removeSession(USER_AUTHORIZATION,"user");
     }
 }

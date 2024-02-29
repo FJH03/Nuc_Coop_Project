@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="../../../../plugins/element-ui/index.css" />
+  <link rel="stylesheet" href="../../../../styles/common.css" />
+  <link rel="stylesheet" href="../../../../styles/page.css" />
+  <style>
+    /* 设置背景图片 */
+    body {
+      background-image: url("../../../../images/back.jpg"); /* 图片路径 */
+      background-repeat: no-repeat; /* 背景重复方式 */
+      background-size: cover; /* 背景尺寸调整 */
+      /* 其他样式属性 */
+    }
+  </style>
+</head>
+<body>
+<style>
+  .centered-title {
+    text-align: center;
+    color: rgb(128,109,158); /* 红色 */
+    font-family: "KaiTi", serif; /* 字体族名称 */
+    font-size: 45px; /* 字体大小 */
+    /* 其他样式属性 */
+
+  }
+
+</style>
+<style>
+  .addBrand-container {
+    opacity: 0.8  ; /* 设置透明度为 0.7（70% 不透明） */
+    /* 其他样式属性 */
+  }
+</style>
+
+</style>
+
+<h1 class="centered-title">课程详情</h1>
+
+<div class="addBrand-container" id="course-add-app">
+
+  <div class="container">
+
+    <el-form
+            ref="ruleForm"
+            :model="ruleForm"
+            :rules="rules"
+            :inline="false"
+            label-width="180px"
+            class="demo-ruleForm"
+    >
+      <el-form-item
+              label="课程名称:"
+              prop="coursename"
+      >
+        <el-input
+                v-model="ruleForm.coursename"
+                placeholder=""
+                maxlength="20"
+        />
+      </el-form-item>
+
+      <el-form-item
+              label="课程内容:"
+              prop="content"
+      >
+        <el-input
+                v-model="ruleForm.content"
+                placeholder=""
+                maxlength="20"
+        />
+      </el-form-item>
+
+      <el-form-item
+              label="课程性质:"
+              prop="courseType"
+      >
+        <el-input
+                v-model="ruleForm.courseType"
+                placeholder=""
+                maxlength="20"
+        />
+
+      </el-form-item>
+      <div class="subBox address">
+        <el-form-item>
+          <el-button  @click="goBack()">
+            返回
+          </el-button>
+        </el-form-item>
+      </div>
+    </el-form>
+  </div>
+</div>
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="../../../../js/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="../../../../plugins/element-ui/index.js"></script>
+<!-- 引入axios -->
+<script src="../../../../js/axios.min.js"></script>
+<script src="../../../js/request.js"></script>
+<script src="../js/course.js"></script>
+<script src="../../../js/validate.js"></script>
+<script src="../../../js/index.js"></script>
+<script>
+  new Vue({
+    el: '#course-add-app',
+    data() {
+      return {
+        id: '',
+        actionType : '',
+        ruleForm : {
+
+        }
+      }
+    },
+    computed: {
+      rules () {
+        return {
+          //账号
+          coursename: [
+            {
+              required: true, trigger: 'blur'
+            }
+          ],
+          content: [{ 'required': true, 'trigger': 'blur' }],
+          courseType: [{ 'required': true, 'trigger': 'blur' }]
+        }
+      }
+    },
+    created() {
+      this.id = requestUrlParam('id')
+      this.actionType = this.id ? 'edit' : 'add'
+      if (this.id) {
+        this.init()
+      }
+    },
+    mounted() {
+    },
+    methods: {
+      async init () {
+        queryCourseById(this.id).then(res => {
+          console.log(res)
+          if (String(res.code) === '1') {
+            console.log(res.data)
+            this.ruleForm = res.data
+          } else {
+            this.$message.error(res.msg || '操作失败')
+          }
+        })
+      },
+      goBack(){
+        window.parent.menuHandle({
+          id: '2',
+          url: '/front/page/course/html/courselist.html',
+          name: '课程管理'
+        },false)
+      }
+    }
+  })
+</script>
+</body>
+</html>

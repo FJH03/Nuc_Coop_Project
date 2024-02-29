@@ -20,21 +20,12 @@ var app = new Vue({
             // 在这里添加发送验证码的逻辑
             axios.post('http://localhost:81/user/sendMsg', {
                 phone: this.phone
-            }).then(resp => {
-                if (resp.data.success) {
-                    alert('验证码已发送到您的手机：' + this.phone);
-                } else {
-                    alert('发送失败！');
-                }
+            }).then(() => {
+                alert('验证码已发送到您的手机')
             })
 
         },
 
-        loginWithUsernameAndPassword: function() {
-            // 在这里添加登录逻辑
-
-
-        },
 
         loginWithPhoneAndVerificationCode: function() {
 // 在这里添加使用手机号和验证码登录的逻辑
@@ -42,13 +33,18 @@ var app = new Vue({
                 phone: this.phone,
                 verificationCode: this.verificationCode
             }).then(resp => {
-                if (resp.data.success) {
-                    alert('使用手机号和验证码登录：' + this.phone + '，验证码：' + this.verificationCode);
-                } else {
-                    alert('登陆失败:' + resp.data.message);
-                }
+                console.log(resp.data)
+                alert('登陆成功：' + resp.data.data);
+                window.location.href = '../page/index.html'
             })
 
         }
     }
 });
+
+function logoutApi(){
+    return $axios({
+        'url': 'http://localhost:81/user/logout',
+        'method': 'post',
+    })
+}

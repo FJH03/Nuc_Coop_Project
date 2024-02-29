@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import nuc.edu.common.R;
 import nuc.edu.service.SessionService;
+import nuc.edu.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import java.io.IOException;
 
 import static nuc.edu.service.impl.SessionServiceImpl.ADMIN_SESSION;
+import static nuc.edu.service.impl.SessionServiceImpl.USER_AUTHORIZATION;
 
 /**
  * @Created with Intellij IDEA Ultimate 2022.02.03 正式旗舰版
@@ -33,17 +35,29 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         log.info("请求的URL:{}", url);
 
         Object admin = sessionService.getSession(ADMIN_SESSION,"admin");
-        req.getSession().setAttribute("admin", admin);
+        String JWT = sessionService.getSession(USER_AUTHORIZATION, "user");
 
-        if (admin == null) {
+        String userId = null;
+
+        if (JWT != null) {
+             userId = JwtUtil.getDataByKey(JWT, "id");
+        }
+
+
+        if (admin == null && userId == null) {
             log.info("请求头为空，返回未登录");
             R<String> error = R.error("NOTLOGIN");
             String notlogin = JSONObject.toJSONString(error);
             resp.getWriter().write(notlogin);
             return false;
-        } else {
+        } else if (admin != null) {
             log.info("请求登录的管理员ID = {}", admin);
             return true;
+        } else if (userId != null) {
+            log.info("请求登录的用户Id = {}", userId);
+            return true;
         }
+
+        return false;
     }
 }

@@ -22,11 +22,10 @@ public class SessionServiceImpl implements SessionService {
     @Autowired
     StringRedisTemplate redisTemplate;
     public static final String ADMIN_SESSION = "ADMIN_SESSION";
-
     public static final String USER_AUTHORIZATION = "USER_AUTHORIZATION";
 
-    // 创建或更新会话信息
-    @Log
+     //创建或更新会话信息
+    @Override
     public void createOrUpdateSession(String tag, Map<String, String> sessionData) {
         sessionData.forEach((k, v) -> {
             redisTemplate.opsForValue().set(tag + "_" + k, v, 30, TimeUnit.MINUTES);
@@ -34,12 +33,12 @@ public class SessionServiceImpl implements SessionService {
     }
 
     // 获取会话信息
+    @Override
     public String getSession(String tag, String sessionId) {
         return redisTemplate.opsForValue().get(tag + "_" + sessionId);
     }
 
     @Override
-    @Log
     public void removeSession(String tag, String sessionId) {
         redisTemplate.delete(tag + "_" + sessionId);
     }

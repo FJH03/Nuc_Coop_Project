@@ -1,0 +1,41 @@
+server:
+  port: 8089
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+spring:
+  cloud:
+    nacos:
+      server-addr: 192.168.130.1:8848
+      username: nacos
+      password: nacos
+
+    inetutils:
+      ignored-interfaces: 'VMware Virtual Ethernet Adapter for VMnet1,VMware Virtual Ethernet Adapter for VMnet8'
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password:
+      database: 0
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/zwf_resume_db
+    username: root
+    password: SXY-E.YT
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  application:
+    name: resumeservice
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+logging:
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS

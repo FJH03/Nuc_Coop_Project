@@ -8,11 +8,9 @@ import nuc.edu.anno.Log;
 import nuc.edu.service.UserService;
 import nuc.edu.common.R;
 import nuc.edu.pojo.User;
-import nuc.edu.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -32,19 +30,18 @@ public class UserController {
     private UserService userService;
     @Operation(summary = "用户登陆")
     @PostMapping("login")
-    public R<String> login(@RequestBody Map map0) {
-        log.info(map0.toString());
-        User u = userService.login(map0);
-        if (u != null) {
-            Map<String, String> map = new HashMap<>();
-            map.put("id", String.valueOf(u.getId()));
-            map.put("phone", u.getPhone());
+    public R<String> login(@RequestBody Map map) {
+        log.info(map.toString());
+        return R.success(userService.login(map));
+    }
 
-            String str = JwtUtil.getToken(map);
-            return R.success(str);
-        } else {
-            return R.error("用户名或密码错误");
-        }
+    @Operation(summary = "用户登出")
+    @Log
+    @PostMapping("logout")
+    public R<String> logout() {
+        log.info("正在执行登出操作。");
+        userService.logout();
+        return R.success("用户登出成功！");
     }
 
     @Operation(summary = "用户页的分页查询")
@@ -75,7 +72,7 @@ public class UserController {
     }
 
     @Operation(summary = "通过id获得用户实体")
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public R<User> getUserById(@PathVariable long id) {
         log.info("id = {}", id);
         return R.success(userService.getUserById(id));
